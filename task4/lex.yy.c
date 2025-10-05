@@ -487,6 +487,7 @@ char *yytext;
 /*
  * File Name:   clite.yy
  * Description: A Flex scanner for Clite that prints tokens.
+ *              Extension: Normalizes float output to 6 decimal places.
  * Author:      Simon Lartey
  * Date:        10/2/2025
  *
@@ -503,11 +504,12 @@ char *yytext;
  *   4. Save the tokens to an output file (overwrite mode):
  *        ./clite_program test.c > output.txt
  */
-#line 22 "clite.yy"
+#line 23 "clite.yy"
 #include <stdio.h>
+#include <stdlib.h>
 extern FILE *yyin;
-#line 509 "lex.yy.c"
-#line 510 "lex.yy.c"
+#line 511 "lex.yy.c"
+#line 512 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -724,12 +726,12 @@ YY_DECL
 		}
 
 	{
-#line 28 "clite.yy"
+#line 30 "clite.yy"
 
 
-#line 31 "clite.yy"
+#line 33 "clite.yy"
     /* ignore preprocessor directives (#include, etc.) */
-#line 732 "lex.yy.c"
+#line 734 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -788,105 +790,111 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 32 "clite.yy"
+#line 34 "clite.yy"
 {}
 	YY_BREAK
 /* remove single-line comments */
 case 2:
 YY_RULE_SETUP
-#line 35 "clite.yy"
+#line 37 "clite.yy"
 {}
 	YY_BREAK
 /* remove multi-line comments */
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 38 "clite.yy"
+#line 40 "clite.yy"
 {}
 	YY_BREAK
 /* remove whitespace */
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 41 "clite.yy"
+#line 43 "clite.yy"
 {}
 	YY_BREAK
 /* remove semi-colon */
 case 5:
 YY_RULE_SETUP
-#line 44 "clite.yy"
+#line 46 "clite.yy"
 {}
 	YY_BREAK
 /* keywords */
 case 6:
 YY_RULE_SETUP
-#line 47 "clite.yy"
+#line 49 "clite.yy"
 { printf("Keyword-%s\n", yytext); }
 	YY_BREAK
-/* float */
+/* float (normalize to 6 decimal places) */
 case 7:
 YY_RULE_SETUP
-#line 50 "clite.yy"
-{ printf("Float-%s\n", yytext); }
+#line 52 "clite.yy"
+{
+                                double val = atof(yytext);
+                                printf("Float-%f\n", val);
+                             }
 	YY_BREAK
 /* integer */
 case 8:
 YY_RULE_SETUP
-#line 53 "clite.yy"
-{ printf("Integer-%s\n", yytext); }
+#line 58 "clite.yy"
+{
+                                int val = atoi(yytext);
+                                printf("Integer-%d\n", val);
+                             }
 	YY_BREAK
 /* identifier */
 case 9:
 YY_RULE_SETUP
-#line 56 "clite.yy"
+#line 64 "clite.yy"
 { printf("Identifier-%s\n", yytext); }
 	YY_BREAK
 /* assignment */
 case 10:
 YY_RULE_SETUP
-#line 59 "clite.yy"
+#line 67 "clite.yy"
 { printf("Assignment\n"); }
 	YY_BREAK
 /* comparison (longest matches first) */
 case 11:
 YY_RULE_SETUP
-#line 62 "clite.yy"
+#line 70 "clite.yy"
 { printf("Comparison-%s\n", yytext); }
 	YY_BREAK
 /* operators */
 case 12:
 YY_RULE_SETUP
-#line 65 "clite.yy"
+#line 73 "clite.yy"
 { printf("Operator-%s\n", yytext); }
 	YY_BREAK
 /* brackets */
 case 13:
 YY_RULE_SETUP
-#line 68 "clite.yy"
+#line 76 "clite.yy"
 { printf("Open-bracket\n"); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 69 "clite.yy"
+#line 77 "clite.yy"
 { printf("Close-bracket\n"); }
 	YY_BREAK
 /* parentheses */
 case 15:
 YY_RULE_SETUP
-#line 72 "clite.yy"
+#line 80 "clite.yy"
 { printf("Open-paren\n"); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 73 "clite.yy"
+#line 81 "clite.yy"
 { printf("Close-paren\n"); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 75 "clite.yy"
+#line 83 "clite.yy"
 ECHO;
 	YY_BREAK
-#line 889 "lex.yy.c"
+#line 897 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1891,7 +1899,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 75 "clite.yy"
+#line 83 "clite.yy"
 
 
 int main(int argc, char *argv[]) {
@@ -1905,3 +1913,4 @@ int main(int argc, char *argv[]) {
     yylex();
     return 0;
 }
+

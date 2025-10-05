@@ -19,11 +19,7 @@
  *
  *   5. Decode back (run again on encoded file):
  *        ./encode_program output_encoded.txt > output_decoded.txt
- *
- *   6. Verify correctness:
- *        diff input_test.txt output_decoded.txt
- *      (No output means the files are identical.)
- Date : 10/1/2025
+ *   Date : 10/1/2025
  */
 
 

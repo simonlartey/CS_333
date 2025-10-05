@@ -2,7 +2,9 @@
  * File Name:   excite.yy
  * Description: A Flex program that:
  *              - Replaces "cat" with "lion" and "cats" with "lions"
+ *                (only when standalone words, not inside bigger words).
  *              - Replaces numbers 0–10 with their English word equivalents
+ *                (only when standalone words).
  * Author:      Simon Lartey
  * Date:        10/2/2025
  * How to Compile and Run:
@@ -17,7 +19,6 @@
  *
  *   4. Save the output into a file (overwrite mode):
  *        ./excite_program test.txt > output.txt
-
  */
 
 %{
@@ -48,13 +49,13 @@ DIGIT   [0-9]
 
 %%
 
-cats            { printf("lions"); }
-cat             { printf("lion"); }
+[[:<:]]cats[[:>:]]      { printf("lions"); }
+[[:<:]]cat[[:>:]]       { printf("lion"); }
 
-10              { replace_number(yytext); }
-{DIGIT}         { replace_number(yytext); }
+[[:<:]]10[[:>:]]        { replace_number(yytext); }
+[[:<:]]{DIGIT}[[:>:]]   { replace_number(yytext); }
 
-.|\n            { printf("%s", yytext); }
+.|\n                    { printf("%s", yytext); }
 
 %%
 

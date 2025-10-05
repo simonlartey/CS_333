@@ -1,4 +1,6 @@
-CREATE TEMPORARY TABLE greetings (
+DROP TABLE IF EXISTS greetings;
+
+CREATE TABLE greetings (
     language VARCHAR(20),
     message  VARCHAR(50)
 );

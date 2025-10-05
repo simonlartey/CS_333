@@ -448,13 +448,31 @@ char *yytext;
  *              wrapping around from 'z' to 'a' and from 'Z' to 'A'. Non-alphabetic
  *              characters are left unchanged.
  * Author:      Simon Lartey
- * Date:        3/03/25
+ * How to Run:
+ *   1. Change into the task1 directory:
+ *        cd task2
+ *   2. Generate the scanner:
+ *        flex encode.yy
+ *
+ *   3. Compile the generated C file:
+ *        gcc lex.yy.c -o encode_program
+ *
+ *   4. Encode a file:
+ *        ./encode_program input_test.txt > output_encoded.txt
+ *
+ *   5. Decode back (run again on encoded file):
+ *        ./encode_program output_encoded.txt > output_decoded.txt
+ *
+ *   6. Verify correctness:
+ *        diff input_test.txt output_decoded.txt
+ *      (No output means the files are identical.)
+ Date : 10/1/2025
  */
-#line 12 "encode.yy"
+#line 32 "encode.yy"
 #include <stdio.h>
 extern FILE *yyin;
-#line 456 "lex.yy.c"
-#line 457 "lex.yy.c"
+#line 474 "lex.yy.c"
+#line 475 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -671,9 +689,9 @@ YY_DECL
 		}
 
 	{
-#line 18 "encode.yy"
+#line 38 "encode.yy"
 
-#line 676 "lex.yy.c"
+#line 694 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -732,31 +750,31 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 19 "encode.yy"
+#line 39 "encode.yy"
 { printf("%c", 'A' + ((*yytext - 'A' + 13) % 26)); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 20 "encode.yy"
+#line 40 "encode.yy"
 { printf("%c", 'a' + ((*yytext - 'a' + 13) % 26)); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 21 "encode.yy"
+#line 41 "encode.yy"
 { printf("%s", yytext); }
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 22 "encode.yy"
+#line 42 "encode.yy"
 { printf("\n"); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 23 "encode.yy"
+#line 43 "encode.yy"
 ECHO;
 	YY_BREAK
-#line 759 "lex.yy.c"
+#line 777 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1761,7 +1779,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 23 "encode.yy"
+#line 43 "encode.yy"
 
 
 int main(int argc, char *argv[]) {

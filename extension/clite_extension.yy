@@ -1,9 +1,10 @@
 /*
  * File Name:   clite.yy
  * Description: A Flex scanner for Clite that prints tokens.
- *              Extension: Normalizes float output to 6 decimal places.
+ *              Extension: Proper handling of both single-line (//) 
+ *              and multi-line (/* ... *​/) comments.
  * Author:      Simon Lartey
- * Date:        10/2/2025
+ * Date:        10/3/2025
  *
  * How to Compile and Run:
  *   1. Generate the scanner with Flex:
@@ -21,7 +22,6 @@
 
 %{
 #include <stdio.h>
-#include <stdlib.h>
 extern FILE *yyin;
 %}
 
@@ -35,8 +35,8 @@ extern FILE *yyin;
     /* remove single-line comments */
 "//".*                      {}
 
-    /* remove multi-line comments */
-"/*"([^*]|\n)*"*/"          {}
+    /* remove multi-line comments (supports spanning multiple lines) */
+"/*"(.|\n)*"*/"              {}
 
     /* remove whitespace */
 [ \t\n]+                     {}
@@ -47,17 +47,11 @@ extern FILE *yyin;
     /* keywords */
 if|else|while|for|int|float  { printf("Keyword-%s\n", yytext); }
 
-    /* float (normalize to 6 decimal places) */
-[0-9]+\.[0-9]+               {
-                                double val = atof(yytext);
-                                printf("Float-%f\n", val);
-                             }
+    /* float */
+[0-9]+\.[0-9]+               { printf("Float-%s\n", yytext); }
 
     /* integer */
-0|[1-9][0-9]*                {
-                                int val = atoi(yytext);
-                                printf("Integer-%d\n", val);
-                             }
+0|[1-9][0-9]*                { printf("Integer-%s\n", yytext); }
 
     /* identifier */
 [A-Za-z_][A-Za-z_0-9]*       { printf("Identifier-%s\n", yytext); }
