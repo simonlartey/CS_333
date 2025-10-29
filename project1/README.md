@@ -53,6 +53,7 @@ C compiler: Apple clang version 15.0.0 (clang-1500.0.40.1)
 **Run:** $ ./TaskOne
 
 **Output:**
+
 ![Screenshot of c task 1](Screenshots/Task1.png)
 
 **Q.b.** 
@@ -73,7 +74,9 @@ For the integer 0x11223344, the program prints the bytes as 44 33 22 11. The lea
 **Run:** $ ./TaskTwo
 
 **Output:**
+
 ![Screenshot of c task 2](Screenshots/Task2.png)
+
 
 ![Screenshot of c task 2](Screenshots/Task2(1).png)
 
@@ -103,10 +106,12 @@ Yes, I can identify the variables. The first 8 bytes correspond to the ptr varia
 
 **Output:**
 #### Without free()
+
 ![Screenshot of c task 3](Screenshots/Task3_without_free.png)
 
 **Output:**
 #### With free()
+
 ![Screenshot of c task 3](Screenshots/Task3_with_free.png)
 
 **Q.b.** 
@@ -122,6 +127,7 @@ With free(): The program’s memory usage stays low and stable. Although allocat
 **Run:** $ ./TaskFour
 
 **Output:**
+
 ![Screenshot of c task 4](Screenshots/Task4.png)
 
 
@@ -133,12 +139,14 @@ For this task, I created three different structs: Structure1 (char, short, int),
 **Structure1** consists of a char, followed by a short, followed by an int. In memory, the char was stored at address 0. The next available address was 1, but since a short must be aligned to an address divisible by 2, the compiler introduced one byte of padding. As a result, the short began at address 2 and occupied two bytes. The int then had to be aligned to an address divisible by 4, so it began at address 4 and occupied four bytes. This meant the struct required a total of 8 bytes in memory, even though the raw sum of its members was only 7. The padding before the short explains the discrepancy. This case shows how a small adjustment ensures the int is properly aligned, and only a single padding byte was necessary.
 
 **Output:**
+
 ![Screenshot of c task 4](Screenshots/Structure1.png)
 
 
 **Structure2** consists of a char, followed by an int, another char, and finally a short. The char was placed at address 0. However, the next member, an int, had to be aligned to a multiple of 4, so the compiler inserted three bytes of padding to push the int to start at address 4. The int then occupied four bytes, filling addresses 4 through 7. The next char was placed at address 8, but then the short required alignment to 2, so it started at address 9 and occupied two bytes. Finally, to satisfy Rule 1, the struct size was padded to a multiple of 4, giving a total size of 12 bytes. Without padding, the struct’s members would have only required 8 bytes. This struct highlights how poor ordering of variables can cause wasted space: padding occurred after the first char, between the second char and the short, and again at the end of the struct.
 
 **Output:**
+
 ![Screenshot of c task 4](Screenshots/Structure2.png)
 
 
@@ -169,6 +177,7 @@ The results show that the sizeof each struct does not always match the sum of it
 **Bad string used: "SIMON LARTEY123"**
 
 **Output:**
+
 ![Screenshot of c task 5](Screenshots/Task5.png)
 
 **Q.b.**
@@ -227,6 +236,7 @@ I modified the original Task 5 program, which allowed buffer overflow to corrupt
 For the final extension, I created a menu-driven program that demonstrates three common run-time errors. Choosing option 1 divides by zero at runtime, which caused the program to crash with a floating-point exception (SIGFPE). Choosing option 2 dereferences a null pointer, producing a segmentation fault. Choosing option 3 runs infinite recursion, eventually exhausting the stack and also causing a segmentation fault. These simple examples clearly show how different programming mistakes can trigger different run-time errors in C.
 
 **Output:**
+
 ![Screenshot of c extension4](Screenshots/Extension4.png)
 
 
