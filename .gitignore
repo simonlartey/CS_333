@@ -1,0 +1,10 @@
+.DS_Store
+
+# Compiled Project 5 extension binaries
+Project5/Extensions/manual_user_memory
+Project5/Extensions/profiler_wc
+Project5/Extensions/wordcounter_hashmap
+
+# Compiled Project 3 test binaries
+project3/cstktest
+project3/cstktest2
